@@ -2,40 +2,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset=utf-8 />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
-    <title>Administrative Services Time Accessibility</title>
+    <title>Amalgamated Communities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src='lib/leaflet/leaflet-src.js'></script>
-    <script src='lib/leaflet/leaflet.js'></script>
-    <script src="lib/leaflet/leaflet-side-by-side.js"></script>
-    <link href='lib/leaflet/leaflet.css' rel='stylesheet' />
-    <link href="lib/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
-    <script src='lib/jquery.min.js'></script>
-    <script src="lib/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="lib/sidebar/L.Control.Sidebar.css" />
     <script src="data/otg.geojson" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+    <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
     <style>
         body {
-            margin: 0;
             padding: 0;
+            margin: 0;
         }
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-        #basemapslidercontainer {
-            position: absolute;
-            top: 200px;
-            left: 10px;
-            z-index: 1000;
-        }
-        #basemapslider{
-            font-size:62.5%;
-            margin: 14px;
-            height: 125px;
-            width:7px;
-            background: white;
+
+        html, body, #map {
+            height: 100%;
         }
         .info {
             padding: 6px 8px; 
@@ -47,246 +29,44 @@
             margin: 0 0 5px; 
             color: #777; 
         }
-        .legend {
-            text-align: left;
-            line-height: 18px; 
-            color: #555; 
-        } 
-        .legend i { 
-            width: 18px; 
-            height: 18px; 
-            float: left; 
-            margin-right: 8px; 
-            opacity: 0.7; 
+        .info h5 {
+            font: 10px/12px Arial, Helvetica, sans-serif;
+            font-style: italic;
+            margin: 5px 0 5px; 
         }        
+        .lorem {
+            font-style: italic;
+            color: #AAA;
+        }
     </style>
 </head>
-
 <body>
-    <div id='map'></div>
+    <div id="sidebar">
+        <h1>Об'єднані територіальні громади</h1>
 
-    <script>
-        //general map state options
-        var map = L.map('map')
-        var southWest = L.latLng(40.00, 20.00),
-        northEast = L.latLng(55.00, 43.00),
-        bounds = L.latLngBounds(southWest, northEast);
+        <p>A responsive sidebar plugin for for <a href="http://leafletjs.com/">Leaflet</a>, a JS library for interactive maps.</p>
 
-        map.setView([49.03, 31.50],6);
-        map.setMaxBounds(bounds);
-        map.setMinZoom(5);
-        map.setMaxZoom(10);
+        <p><b>Click on the marker to show the sidebar again when you've closed it.</b></p>
 
-        // create pane for showing labels on top the geojson file
-        map.createPane('labels_pane')
+        <p>Other examples:</p>
 
-        // This pane is above markers but below popups
-        map.getPane('labels_pane').style.zIndex = 650;
+        <ul>
+            <li><a href="listing-markers.html">listing-markers example</a></li>
+            <li><a href="two-sidebars.html">two-sidebars example</a></li>
+        </ul>
 
-        // Layers in this pane are non-interactive and do not obscure mouse/touch events
-        map.getPane('labels_pane').style.pointerEvents = 'none';
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
-        // add basemap
-        L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj47dr6zg117v2rlsm62ctk8x/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXlrb2xhLWtvenlyIiwiYSI6ImNpemNzeHBhaDAwNHkycW8wZm40OHptdTMifQ.6q-bTx4fwm9Ch-knzk1i3Q', {
-            maxZoom: 18,
-            attribution: '<a href="http://cnap.in.ua/">Портал реформи адміністративних послуг</a> | ' + 
-                    '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors | ' +
-                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            id: 'mapbox.streets'
-        }).addTo(map);
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
-        //add access real layer
-        var ar_layer = L.tileLayer('data/ar_3857/{z}/{x}/{y}.png', {
-            minZoom: 5,
-            tms: true,
-        }).addTo(map);
-        //add access expert layer
-        var ae_layer = L.tileLayer('data/ae_3857/{z}/{x}/{y}.png', {
-            minZoom: 5,
-            tms: true,
-        }).addTo(map)
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
-        function highlightFeature(e) {
-            var layer = e.target;
-
-            layer.setStyle({
-                weight: 3,
-                color: '#666',
-                dashArray: '',
-                fillOpacity: 0.5
-            });
-
-            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                layer.bringToFront();
-            }
-
-            info.update(layer.feature.properties);
-        }
-
-        var otgLayer;
-
-        function resetHighlight(e) {
-            otgLayer.resetStyle(e.target);
-            info.update();
-        }
-
-        function zoomToFeature(e) {
-            map.fitBounds(e.target.getBounds());
-        }
-
-        function regStyle(feature){
-            return {
-                fillColor: 'blue',
-                weight: 1,
-                fillOpacity: 0.3,
-                color: 'white',
-                dashArray: 3,
-                opacity: 0.8,
-            }
-        };
-
-        function onEachFeature(feature, layer) {
-            layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight,
-                click: zoomToFeature
-            });
-        }        
-
-        otgLayer = L.geoJson(otg, {
-            style: regStyle,
-            onEachFeature: onEachFeature,
-            pane: 'geojson_pane'
-        }).addTo(map);
-
-    // control that shows amalgamated community info on hover
-        var info = L.control();
-
-        info.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'info');
-            this.update();
-            return this._div;
-        };
-
-        function featureprops (props) {
-            var infocontent = [];
-            for (var prop in props) {
-                infocontent.push(prop + ': ' + props[prop]);
-            }
-            return infocontent.join('<br />');
-        };
-
-        info.update = function (props) {
-            this._div.innerHTML = '<h4>Administrative Services Time Accessibility</h4>' + (props ? featureprops(props) : 'Hover over an Amalgamated Community');
-        };
-
-        info.addTo(map);
-
-        //functions for lagends items
-        function getColor_ae(d) {
-            return d == 30  ? '#ffdabf' :
-            d == 20  ? '#ffb68e' :
-            d == 10  ? '#ff6f2d' : 
-            '';
-        }
-
-        function getColor_ar(d) {
-            return d == 30  ? '#ffdfbf' :
-            d == 20  ? '#ffc08e' :
-            d == 10  ? '#ff822d' : 
-            '';
-        }
-
-        // Legend for "ACCESS EXPERT (right) MAP"
-        var legend_ae = L.control({position: 'bottomright'});
-
-        legend_ae.onAdd = function (map) {
-
-            var div = L.DomUtil.create('div', 'info legend'),
-                grades = [10, 20, 30],
-                labels = ['<strong> Time Accessibility. Proposals</strong>'],
-                data_list = [' - 29kk p. (74,1%), + 5,5%', ' - 36,1kk p. (92,4%), + 6,4%', '  - 38,6kk p. (98,8%), + 1,8%'],
-                from, to;
-
-            for (var i = 0; i < grades.length; i++) {
-                from = grades[i];
-                data = data_list[i];
-
-                labels.push(
-                    '<i style="background:' + getColor_ae(from) + '"></i> ' +
-                    from + ' minutes' + data);
-                }
-
-            div.innerHTML = labels.join('<br>');
-            return div;
-        };
-
-        legend_ae.addTo(map);
-
-        // Legend for "ACCESS REAL (left) MAP"
-        var legend_ar = L.control({position: 'bottomleft'});
-
-        legend_ar.onAdd = function (map) {
-
-            var div = L.DomUtil.create('div', 'info legend'),
-                grades = [10, 20, 30],
-                labels = ['<strong> Time Accessibility. Current State </strong>'],
-                data_list_ar = [' - 26,9kk p. (68,5%)', ' - 33,6kk p. (86%)', ' - 37,9kk p. (97%)'],
-                from, to;
-
-            for (var i = 0; i < grades.length; i++) {
-                from = grades[i];
-                data_ar = data_list_ar[i];
-
-                labels.push(
-                    '<i style="background:' + getColor_ar(from) + '"></i> ' +
-                    from + ' minutes ' + data_ar);
-                }
-
-            div.innerHTML = labels.join('<br>');
-            return div;
-        };
-
-        legend_ar.addTo(map);   
-
-        //add slider for changing layer transparency
-        $(document).ready(function () {
-            $("#basemapslider").slider({
-                animate: true,
-                value: 1,
-                orientation: "vertical",
-                min: 0,
-                max: 1,
-                step: 0.01,
-                slide: function (event, ui) {
-                    ar_layer.setOpacity(ui.value),
-                    ae_layer.setOpacity(ui.value);
-                }
-            });
-            $('#basemapslider').mouseup(function(){
-                map.dragging.enable();
-            })
-            //add side by side control
-            L.control.sideBySide(ar_layer, ae_layer).addTo(map)
-        })
-
-        // switching on and off OTGlayer
-        var overlay = {
-            "Amalgamated Community": otgLayer
-        };
-        layerControl = L.control.layers(null, overlay, {position: 'topleft'});
-        layerControl.addTo(map);
-
-        L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj4734xjt0snd2splhlf0z4c8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXlrb2xhLWtvenlyIiwiYSI6ImNpemNzeHBhaDAwNHkycW8wZm40OHptdTMifQ.6q-bTx4fwm9Ch-knzk1i3Q', {
-            maxZoom: 18,
-            id: 'mapbox.labels',
-            pane: 'labels_pane'
-        }).addTo(map);        
-    </script>
-
-    <div id="basemapslidercontainer">
-        <div id="basemapslider">
-            </div>
+        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
     </div>
+    <div id="map"></div>
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script src="lib/sidebar/L.Control.Sidebar.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/get_data.js"></script>
 </body>
 </html>
