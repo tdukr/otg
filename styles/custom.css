@@ -28,7 +28,7 @@ html, body, #map {
     font: 14px/16px Arial, Helvetica, sans-serif;
 }
 .otg_data {
-    letter-spacing: 1.1px;
+    letter-spacing: 0.5px;
     margin: 0 0 5px 0;
 }
 #line {
