@@ -1,0 +1,46 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, #map {
+    height: 100%;
+}
+.info {
+    padding: 6px 8px; 
+    font: 14px/16px Arial, Helvetica, sans-serif; 
+    background: white; background: rgba(255,255,255,0.8); 
+    box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px;
+} 
+.info h4 { 
+    margin: 0 0 5px; 
+    color: #777; 
+}
+.info h5 {
+    font: 10px/12px Arial, Helvetica, sans-serif;
+    font-style: italic;
+    margin: 5px 0 5px; 
+}        
+#sidebar {
+    font: 14px/16px Arial, Helvetica, sans-serif;
+}
+#sidebar p {
+    font: 14px/16px Arial, Helvetica, sans-serif;
+}
+.otg_data {
+    letter-spacing: 1.1px;
+    margin: 0 0 5px 0;
+}
+#line {
+    border-bottom: 1px solid #AAA;
+    padding-bottom: 20px;
+}
+#sidebar h1 {
+    font-size: 24px;
+    line-height: 1;
+    margin: 25px 0 0 0;
+}
+.lorem {
+    font-style: italic;
+    color: #AAA;
+2

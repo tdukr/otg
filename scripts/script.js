@@ -1,9 +1,9 @@
 var map = L.map('map')
 var southWest = L.latLng(40.00, 0.00),
-northEast = L.latLng(55.00, 43.00),
+northEast = L.latLng(55.00, 50.00),
 bounds = L.latLngBounds(southWest, northEast);
 
-map.setView([49.03, 31.50],6);
+map.setView([48.50, 30.50],6);
 map.setMaxBounds(bounds);
 map.setMinZoom(5);
 map.setMaxZoom(10);
@@ -69,18 +69,20 @@ function resetHighlight(e) {
 
 function openSidebar(e) {
     sidebar.show();
-    sidebar.setContent('<h2>' + e.target.feature.properties.OTG + '</h2><br />' + 
-        area(e) + 
-        city_popul(e) +
-        urban_index(e) +
-        settl_num(e) +
-        elections(e) +
-        income_pps(e) +
-        outlay_pps(e) +
-        subsidy(e) +
-        outlay_adm(e) +
-        subvent_infr(e) +
-        subvent_pcnt(e)
+    sidebar.setContent('<div id="sidebar"><h1>' + e.target.feature.properties.OTG + '</h1></div><br />' + 
+        '<div id="sidebar"><p class="otg_data">Населення ' + e.target.feature.properties.popul_text + '</p></div>' +
+        '<div id="sidebar"><p class="otg_data">' + area(e) + '</p></div>' + 
+        '<div id="sidebar"><p class="otg_data">' + city_popul(e) + '</p></div>' + 
+        '<div id="sidebar"><p class="otg_data">' + urban_index(e) + '</p></div>' + 
+        '<div id="sidebar"><p class="otg_data">' + "Кількість об'єднаних адміністративних одиниць: " + e.target.feature.properties.num_units + '</p></div>' +
+        '<div id="sidebar"><p class="otg_data">' + settl_num(e) + '</p></div>' + 
+        '<div id="sidebar"><p class="otg_data"><div id="line">' + elections(e) + '</div></p></div>' + 
+        '<div id="sidebar"><p class="otg_data">' + income_pps(e) + '</p></div>' + 
+        '<div id="sidebar"><p class="otg_data">' + outlay_pps(e) + '</p></div>' + 
+        '<div id="sidebar"><p class="otg_data">' + subsidy(e) + '</p></div>' + 
+        '<div id="sidebar"><p class="otg_data">' + outlay_adm(e) + '</p></div>' + 
+        '<div id="sidebar"><p class="otg_data">' + subvent_infr(e) + '</p></div>' + 
+        '<div id="sidebar"><p class="otg_data">' + subvent_pcnt(e) + '</p></div>'
         );
     data(e);
 };
@@ -96,10 +98,20 @@ function regStyle(feature){
     }
 };
 
+function zoomToFeature(e){
+    map.fitBounds(e.target.getBounds(), {
+        paddingTopLeft: [500,0]
+    });
+    console.log('zoomToFeature is starting')
+};
+
+map.doubleClickZoom.disable();
+
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
+        dblclick: zoomToFeature,
         click: openSidebar
     });
 };
@@ -107,10 +119,6 @@ function onEachFeature(feature, layer) {
 setTimeout(function () {
     sidebar.show();
 }, 500);
-
-var marker = L.marker([50.2, 31]).addTo(map).on('click', function () {
-    sidebar.toggle();
-});
 
 var otgLayer = L.geoJson(otg, {
     style: regStyle,

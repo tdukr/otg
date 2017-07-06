@@ -1,7 +1,7 @@
 function area(e) {
     if (typeof e.target.feature.properties.area !== 'undefined') {
         console.log('Площа: ' + e.target.feature.properties.area);
-        return('Площа, кв. км.: ' + e.target.feature.properties.area + '<br />');
+        return('Площа, кв. км: ' + e.target.feature.properties.area + '<br />');
     }
     else {
         console.log('No data about areas')
@@ -56,7 +56,7 @@ function elections(e) {
 function income_pps(e) {
     if (typeof e.target.feature.properties.income_pps !== 'undefined') {
         console.log('Власні доходи на мешканця, 2016: ' + e.target.feature.properties.income_pps)
-        return('Власні доходи на мешканця, 2016: ' + e.target.feature.properties.income_pps + '<br />')
+        return('Власні доходи на мешканця, грн у 2016: ' + e.target.feature.properties.income_pps + '<br />')
     }
     else {
         console.log('No data about the income per person')
@@ -67,7 +67,7 @@ function income_pps(e) {
 function outlay_pps(e) {
     if (typeof e.target.feature.properties.outlay_pps !== 'undefined') {
         console.log('Капітальні видатки на мешканця, 2016: ' + e.target.feature.properties.outlay_pps)
-        return('Капітальні видатки на мешканця, 2016: ' + e.target.feature.properties.outlay_pps + '<br />')
+        return('Капітальні видатки на мешканця, грн у 2016: ' + e.target.feature.properties.outlay_pps + '<br />')
     }
     else {
         console.log('No data about the outlay per person')
@@ -88,8 +88,8 @@ function subsidy(e) {
 
 function outlay_adm(e) {
     if (typeof e.target.feature.properties.outlay_adm !== 'undefined') {
-        console.log('Питома вага видатків на утримання апарату управління, %: ' + e.target.feature.properties.outlay_adm)
-        return('Питома вага видатків на утримання апарату управління, %: ' + e.target.feature.properties.outlay_adm + '<br />')
+        console.log('Питома вага видатків на утримання апарату управління: ' + e.target.feature.properties.outlay_adm)
+        return('Питома вага видатків на утримання апарату управління: ' + e.target.feature.properties.outlay_adm + '<br />')
     }
     else {
         console.log('No data about the outlay for administration')
@@ -110,8 +110,8 @@ function subvent_infr(e) {
 
 function subvent_pcnt(e) {
     if (typeof e.target.feature.properties.subvent_pcnt !== 'undefined') {
-        console.log('Частка субвенцій на формування інфраструктури ОТГ, %: ' + e.target.feature.properties.subvent_pcnt)
-        return('Частка субвенцій на формування інфраструктури ОТГ, %: ' + e.target.feature.properties.subvent_pcnt + '<br />')
+        console.log('Частка субвенцій на формування інфраструктури ОТГ: ' + e.target.feature.properties.subvent_pcnt)
+        return('Частка субвенцій на формування інфраструктури ОТГ: ' + e.target.feature.properties.subvent_pcnt + '<br />')
     }
     else {
         console.log('No data about the subventions part in budget')
