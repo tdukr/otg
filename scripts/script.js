@@ -6,7 +6,7 @@ bounds = L.latLngBounds(southWest, northEast);
 map.setView([48.50, 30.50],6);
 map.setMaxBounds(bounds);
 map.setMinZoom(5);
-map.setMaxZoom(10);
+map.setMaxZoom(11);
 
 // create pane for showing labels on top the geojson file
 map.createPane('labels_pane');
@@ -28,7 +28,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj47dr6zg117v2rlsm62c
 }).addTo(map);
 
 //labels' basemap
-L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj4734xjt0snd2splhlf0z4c8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXlrb2xhLWtvenlyIiwiYSI6ImNpemNzeHBhaDAwNHkycW8wZm40OHptdTMifQ.6q-bTx4fwm9Ch-knzk1i3Q', {
+L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj4tlgr7d0j0l2spgztk8jkut/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXlrb2xhLWtvenlyIiwiYSI6ImNpemNzeHBhaDAwNHkycW8wZm40OHptdTMifQ.6q-bTx4fwm9Ch-knzk1i3Q', {
     maxZoom: 18,
     id: 'mapbox.labels',
     pane: 'labels_pane'
@@ -85,6 +85,7 @@ function openSidebar(e) {
         '<div id="sidebar"><p class="otg_data">' + subvent_pcnt(e) + '</p></div>'
         );
     data(e);
+    infobutton();
 };
 
 function regStyle(feature){
