@@ -15,29 +15,28 @@
     <style></style>
 </head>
 <body>
+    <div id="map"></div>
     <div id="sidebar">
         <h1>Об'єднані територіальні громади</h1>
 
-        <p>A responsive sidebar plugin for for <a href="http://leafletjs.com/">Leaflet</a>, a JS library for interactive maps.</p>
+        <p>5 лютого 2015 року Верховною Радою України був прийнятий <a href="http://zakon5.rada.gov.ua/laws/show/157-19" target="_blank"><span class="link">Закон України «Про добровільне об'єднання територіальних громад»</span></a>. Згідно з цим законом сусідні міські, селищні, сільські ради можуть об'єднатися в одну громаду, яка матиме один спільний орган місцевого самоврядування. Добровільне об'єднання територіальних громад сіл, селищ, міст здійснюється з дотриманням таких умов:</p>
 
-        <p><b>Click on the marker to show the sidebar again when you've closed it.</b></p>
+        <ol>
+            <li>у складі об'єднаної територіальної громади не може існувати іншої територіальної громади, яка має свій представницький орган місцевого самоврядування;</li>
+            <li>територія об'єднаної територіальної громади має бути нерозривною, межі об'єднаної територіальної громади визначаються по зовнішніх межах юрисдикції рад територіальних громад, що об'єдналися;</li>
+            <li>об'єднана територіальна громада має бути розташована в межах території Автономної Республіки Крим, однієї області;</li>
+            <li>при прийнятті рішень щодо добровільного об'єднання територіальних громад беруться до уваги історичні, природні, етнічні, культурні та інші чинники, що впливають на соціально-економічний розвиток об'єднаної територіальної громади;</li>
+            <li>якість та доступність публічних послуг, що надаються в об'єднаній територіальній громаді, не можуть бути нижчими, ніж до об'єднання.</li>
+        </ol>
 
-        <p>Other examples:</p>
+        <div class="lorem">Детальнішу інформацію про проведення реформи можна знайти <a href="http://decentralization.gov.ua/" target="_blank"><span class="link">тут</span></a></div>
+        <br />
+        <div class="lorem">Розроблена карта відображає об'єднані територіальні громади, в яких були проведені вибори, станом на 1 липня 2017 р.</div>
+        <br />
+        <div class="lorem">Колір ОТГ відображає рік проведення перших виборів (<b><span id="year_15">2015</span></b>, <b><span id="year_16">2016</span></b>, <b><span id="year_17">2017</span>)</b>.</div>
 
-        <ul>
-            <li><a href="http://zakon2.rada.gov.ua/laws/show/157-19">Закон України Про добровільне об'єднання територіальних громад</a></li>
-            <li><a href="two-sidebars.html">two-sidebars example</a></li>
-        </ul>
-
-        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-
-        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-
-        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-
-        <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
     </div>
-    <div id="map"></div>
+
     <script src="lib/leaflet/leaflet.js"></script>
     <script src="lib/sidebar/L.Control.Sidebar.js"></script>
     <script src="scripts/script.js"></script>

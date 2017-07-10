@@ -62,8 +62,16 @@ function highlightFeature(e) {
 //define otg layer
 var otgLayer;
 
-function resetHighlight(e) {
-    otgLayer.resetStyle(e.target);
+function resetHighlight_15(e) {
+    otgLayer_15.resetStyle(e.target);
+    info.update();
+};
+function resetHighlight_16(e) {
+    otgLayer_16.resetStyle(e.target);
+    info.update();
+};
+function resetHighlight_17(e) {
+    otgLayer_17.resetStyle(e.target);
     info.update();
 };
 
@@ -88,11 +96,33 @@ function openSidebar(e) {
     infobutton();
 };
 
-function regStyle(feature){
+function style_15(feature){
     return {
-        fillColor: 'blue',
+        fillColor: '#de2d26',
         weight: 1,
-        fillOpacity: 0.3,
+        fillOpacity: 0.6,
+        color: 'white',
+        dashArray: 3,
+        opacity: 0.8,
+    }
+};
+
+function style_16(feature){
+    return {
+        fillColor: '#8856a7',
+        weight: 1,
+        fillOpacity: 0.6,
+        color: 'white',
+        dashArray: 3,
+        opacity: 0.8,
+    }
+};
+
+function style_17(feature){
+    return {
+        fillColor: '#2ca25f',
+        weight: 1,
+        fillOpacity: 0.6,
         color: 'white',
         dashArray: 3,
         opacity: 0.8,
@@ -108,10 +138,28 @@ function zoomToFeature(e){
 
 map.doubleClickZoom.disable();
 
-function onEachFeature(feature, layer) {
+function onEachFeature_15(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
-        mouseout: resetHighlight,
+        mouseout: resetHighlight_15,
+        dblclick: zoomToFeature,
+        click: openSidebar
+    });
+};
+
+function onEachFeature_16(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight_16,
+        dblclick: zoomToFeature,
+        click: openSidebar
+    });
+};
+
+function onEachFeature_17(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight_17,
         dblclick: zoomToFeature,
         click: openSidebar
     });
@@ -121,14 +169,30 @@ setTimeout(function () {
     sidebar.show();
 }, 500);
 
-var otgLayer = L.geoJson(otg, {
-    style: regStyle,
-    onEachFeature: onEachFeature,
+var otgLayer_15 = L.geoJson(otg, {
+    filter: function(feature, layer){
+        return feature.properties.year == "2015";
+    },
+    style: style_15,
+    onEachFeature: onEachFeature_15,
 }).addTo(map);
 
-map.on('click', function () {
-    sidebar.hide();
-});
+var otgLayer_16 = L.geoJson(otg, {
+    filter: function(feature, layer){
+        return feature.properties.year == "2016";
+    },
+    style: style_16,
+    onEachFeature: onEachFeature_16,
+}).addTo(map);
+
+var otgLayer_17 = L.geoJson(otg, {
+    filter: function(feature, layer){
+        return feature.properties.year == "2017";
+    },
+    style: style_17,
+    onEachFeature: onEachFeature_17,
+}).addTo(map);
+
 
 /*//SIDEBAR console.log part for handling the issue
         sidebar.on('show', function () {
@@ -177,3 +241,7 @@ info.update = function (props) {
         '<h5>Натисніть для відображення детальної інформації</h5>' : 'Наведіть на ОТГ');
 };
 info.addTo(map);
+
+map.on('click', function () {
+    sidebar.hide();
+});
