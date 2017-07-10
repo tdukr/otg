@@ -8,14 +8,10 @@ map.setMaxBounds(bounds);
 map.setMinZoom(5);
 map.setMaxZoom(11);
 
-// create pane for showing labels on top the geojson file
+//create pane for showing labels on top the geojson file
 map.createPane('labels_pane');
 map.getPane('labels_pane').style.zIndex = 650;
 map.getPane('labels_pane').style.pointerEvents = 'none';
-
-map.createPane('basemap_pane');
-map.getPane('basemap_pane').style.zIndex = 100;
-map.getPane('basemap_pane').style.pointerEvents = 'none';        
 
 //main basemap
 L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj47dr6zg117v2rlsm62ctk8x/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXlrb2xhLWtvenlyIiwiYSI6ImNpemNzeHBhaDAwNHkycW8wZm40OHptdTMifQ.6q-bTx4fwm9Ch-knzk1i3Q', {
@@ -24,7 +20,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj47dr6zg117v2rlsm62c
                     '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors | ' +
                     'Imagery © <a href="http://mapbox.com">Mapbox</a>',
     id: 'mapbox.streets',
-    pane: 'basemap_pane'
 }).addTo(map);
 
 //labels' basemap
@@ -62,6 +57,7 @@ function highlightFeature(e) {
 //define otg layer
 var otgLayer;
 
+//reset highlight functions for filtered layers
 function resetHighlight_15(e) {
     otgLayer_15.resetStyle(e.target);
     info.update();
@@ -75,6 +71,7 @@ function resetHighlight_17(e) {
     info.update();
 };
 
+//open sidebar while clicking on the OTG
 function openSidebar(e) {
     sidebar.show();
     sidebar.setContent('<div id="sidebar"><h1>' + e.target.feature.properties.OTG + '</h1></div><br />' + 
@@ -96,6 +93,7 @@ function openSidebar(e) {
     infobutton();
 };
 
+//style filtered layers
 function style_15(feature){
     return {
         fillColor: '#de2d26',
@@ -106,7 +104,6 @@ function style_15(feature){
         opacity: 0.8,
     }
 };
-
 function style_16(feature){
     return {
         fillColor: '#8856a7',
@@ -117,7 +114,6 @@ function style_16(feature){
         opacity: 0.8,
     }
 };
-
 function style_17(feature){
     return {
         fillColor: '#2ca25f',
@@ -129,6 +125,7 @@ function style_17(feature){
     }
 };
 
+//zoom to feature function for doubleclick event
 function zoomToFeature(e){
     map.fitBounds(e.target.getBounds(), {
         paddingTopLeft: [500,0]
@@ -138,6 +135,7 @@ function zoomToFeature(e){
 
 map.doubleClickZoom.disable();
 
+//events for filtered layers
 function onEachFeature_15(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
@@ -146,7 +144,6 @@ function onEachFeature_15(feature, layer) {
         click: openSidebar
     });
 };
-
 function onEachFeature_16(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
@@ -155,7 +152,6 @@ function onEachFeature_16(feature, layer) {
         click: openSidebar
     });
 };
-
 function onEachFeature_17(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
@@ -165,10 +161,12 @@ function onEachFeature_17(feature, layer) {
     });
 };
 
+//sidebar  animation
 setTimeout(function () {
     sidebar.show();
 }, 500);
 
+//define filtered layers
 var otgLayer_15 = L.geoJson(otg, {
     filter: function(feature, layer){
         return feature.properties.year == "2015";
@@ -192,28 +190,6 @@ var otgLayer_17 = L.geoJson(otg, {
     style: style_17,
     onEachFeature: onEachFeature_17,
 }).addTo(map);
-
-
-/*//SIDEBAR console.log part for handling the issue
-        sidebar.on('show', function () {
-            console.log('Sidebar will be visible.');
-        });
-
-        sidebar.on('shown', function () {
-            console.log('Sidebar is visible.');
-        });
-
-        sidebar.on('hide', function () {
-            console.log('Sidebar will be hidden.');
-        });
-
-        sidebar.on('hidden', function () {
-            console.log('Sidebar is hidden.');
-        });
-
-        L.DomEvent.on(sidebar.getCloseButton(), 'click', function () {
-            console.log('Close button clicked.');
-        });*/
 
 // INFOPANEL BLOCK
 var info = L.control();
@@ -242,6 +218,7 @@ info.update = function (props) {
 };
 info.addTo(map);
 
+//hide sidebar when clicking on the map
 map.on('click', function () {
     sidebar.hide();
 });

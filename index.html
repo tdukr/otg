@@ -5,14 +5,17 @@
     <title>Об'єднані територіальні громади</title>
     <link rel="shortcut icon" href="data/tdu.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- LEAFLET -->
     <script src='lib/leaflet/leaflet-src.js'></script>
     <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+    <!-- Leaflet SideBar -->
     <link rel="stylesheet" href="lib/sidebar/L.Control.Sidebar.css" />
+    <!-- Style, Data -->
     <link rel="stylesheet" href="styles/custom.css" />
     <script src="data/otg.geojson" ></script>
+    <!-- AJAX -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
     <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
-    <style></style>
 </head>
 <body>
     <div id="map"></div>
@@ -34,7 +37,6 @@
         <div class="lorem">Розроблена карта відображає об'єднані територіальні громади, в яких були проведені вибори, станом на 1 липня 2017 р.</div>
         <br />
         <div class="lorem">Колір ОТГ відображає рік проведення перших виборів (<b><span id="year_15">2015</span></b>, <b><span id="year_16">2016</span></b>, <b><span id="year_17">2017</span>)</b>.</div>
-
     </div>
 
     <script src="lib/leaflet/leaflet.js"></script>
