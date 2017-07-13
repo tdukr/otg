@@ -7,14 +7,16 @@ html, body, #map {
     height: 100%;
 }
 .info {
+    top: 6px;
+    right: 60px;
     padding: 6px 8px; 
     font: 14px/16px Arial, Helvetica, sans-serif; 
-    background: white; background: rgba(255,255,255,0.8); 
+    background: white; background: rgba(255,255,255,0.75); 
     box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px;
 } 
 .info h4 { 
     margin: 0 0 5px; 
-    color: #777; 
+    color: #777;
 }
 .info h5 {
     font: 10px/12px Arial, Helvetica, sans-serif;
@@ -74,3 +76,11 @@ html, body, #map {
 #year_17 {
     color: #2ca25f;
 }
+div.image {
+    position: absolute;
+    content:url(../data/tdu.png);
+    height: 50px;
+    z-index: 1000;
+    top: 15px;
+    right: 12px;
+    opacity: 0.9;

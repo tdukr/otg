@@ -6,7 +6,7 @@ bounds = L.latLngBounds(southWest, northEast);
 map.setView([48.50, 30.50],6);
 map.setMaxBounds(bounds);
 map.setMinZoom(5);
-map.setMaxZoom(11);
+map.setMaxZoom(18);
 
 //create pane for showing labels on top the geojson file
 map.createPane('labels_pane');
@@ -222,3 +222,12 @@ info.addTo(map);
 map.on('click', function () {
     sidebar.hide();
 });
+
+// switching on and off OTGlayers, based on elections year
+var overlay = {
+    "2015 рік виборів": otgLayer_15,
+    "2016 рік виборів": otgLayer_16,
+    "2017 рік виборів": otgLayer_17,
+};
+layerControl = L.control.layers(null, overlay, {position: 'topleft'});
+layerControl.addTo(map);

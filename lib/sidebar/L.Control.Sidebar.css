@@ -28,7 +28,7 @@
     box-sizing: border-box;
     padding: 8px 24px;
     font-size: 1.1em;
-    background: white; background: rgba(255,255,255,0.95);
+    background: white; background: rgba(255,255,255,0.75);
     box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
     -webkit-border-radius: 4px;
     border-radius: 4px; }
@@ -89,7 +89,6 @@
     font-size: 25px;
     line-height: 1em;
     text-align: center;
-    background: white;
     -webkit-border-radius: 16px;
     border-radius: 16px;
     cursor: pointer;
