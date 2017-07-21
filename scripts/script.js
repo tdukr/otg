@@ -58,19 +58,16 @@ function highlightFeature(e) {
 var otgLayer;
 
 //reset highlight functions for filtered layers
-function resetHighlight_15(e) {
-    otgLayer_15.resetStyle(e.target);
-    info.update();
-};
-function resetHighlight_16(e) {
-    otgLayer_16.resetStyle(e.target);
-    info.update();
-};
-function resetHighlight_17(e) {
-    otgLayer_17.resetStyle(e.target);
-    info.update();
-};
+function resetHighlight(e) {
+    target = e.target;
+    year = target.feature.properties.year;
+    layer_string = 'otgLayer_' + year;
+    layer = window[layer_string];
 
+    layer.resetStyle(e.target);
+    
+    info.update();
+};
 //open sidebar while clicking on the OTG
 function openSidebar(e) {
     sidebar.show();
@@ -136,26 +133,10 @@ function zoomToFeature(e){
 map.doubleClickZoom.disable();
 
 //events for filtered layers
-function onEachFeature_15(feature, layer) {
+function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
-        mouseout: resetHighlight_15,
-        dblclick: zoomToFeature,
-        click: openSidebar
-    });
-};
-function onEachFeature_16(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight_16,
-        dblclick: zoomToFeature,
-        click: openSidebar
-    });
-};
-function onEachFeature_17(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight_17,
+        mouseout: resetHighlight,
         dblclick: zoomToFeature,
         click: openSidebar
     });
@@ -167,28 +148,28 @@ setTimeout(function () {
 }, 500);
 
 //define filtered layers
-var otgLayer_15 = L.geoJson(otg, {
+var otgLayer_2015 = L.geoJson(otg, {
     filter: function(feature, layer){
         return feature.properties.year == "2015";
     },
     style: style_15,
-    onEachFeature: onEachFeature_15,
+    onEachFeature: onEachFeature,
 }).addTo(map);
 
-var otgLayer_16 = L.geoJson(otg, {
+var otgLayer_2016 = L.geoJson(otg, {
     filter: function(feature, layer){
         return feature.properties.year == "2016";
     },
     style: style_16,
-    onEachFeature: onEachFeature_16,
+    onEachFeature: onEachFeature,
 }).addTo(map);
 
-var otgLayer_17 = L.geoJson(otg, {
+var otgLayer_2017 = L.geoJson(otg, {
     filter: function(feature, layer){
         return feature.properties.year == "2017";
     },
     style: style_17,
-    onEachFeature: onEachFeature_17,
+    onEachFeature: onEachFeature,
 }).addTo(map);
 
 // INFOPANEL BLOCK
@@ -225,9 +206,9 @@ map.on('click', function () {
 
 // switching on and off OTGlayers, based on elections year
 var overlay = {
-    "2015 рік виборів": otgLayer_15,
-    "2016 рік виборів": otgLayer_16,
-    "2017 рік виборів": otgLayer_17,
+    "2015 рік виборів": otgLayer_2015,
+    "2016 рік виборів": otgLayer_2016,
+    "2017 рік виборів": otgLayer_2017,
 };
 layerControl = L.control.layers(null, overlay, {position: 'topleft'});
 layerControl.addTo(map);
