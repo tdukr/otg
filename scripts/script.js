@@ -13,7 +13,7 @@ map.createPane('labels_pane');
 map.getPane('labels_pane').style.zIndex = 650;
 map.getPane('labels_pane').style.pointerEvents = 'none';
 
-//main basemap
+//BASEMAPS
 L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj47dr6zg117v2rlsm62ctk8x/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXlrb2xhLWtvenlyIiwiYSI6ImNpemNzeHBhaDAwNHkycW8wZm40OHptdTMifQ.6q-bTx4fwm9Ch-knzk1i3Q', {
     maxZoom: 18,
     attribution: '<a href="http://tdukr.com/uk/">Товариство дослідників України</a> | ' + 
@@ -29,45 +29,13 @@ L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj4tlgr7d0j0l2spgztk8
     pane: 'labels_pane'
 }).addTo(map);
 
+// SIDEBAR
 //define and add sidebar to the map
 var sidebar = L.control.sidebar('sidebar', {
     closeButton: true,
     position: 'left'
 });
 map.addControl(sidebar);
-
-//highlight feature while mouseover
-function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 3,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.5
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
-
-    info.update(layer.feature.properties);
-}
-
-//define otg layer
-var otgLayer;
-
-//reset highlight functions for filtered layers
-function resetHighlight(e) {
-    target = e.target;
-    year = target.feature.properties.year;
-    layer_string = 'otgLayer_' + year;
-    layer = window[layer_string];
-
-    layer.resetStyle(e.target);
-    
-    info.update();
-};
 //open sidebar while clicking on the OTG
 function openSidebar(e) {
     sidebar.show();
@@ -89,8 +57,64 @@ function openSidebar(e) {
     data(e);
     infobutton();
 };
+//sidebar  animation
+setTimeout(function () {
+    sidebar.show();
+}, 500);
+//hide sidebar when clicking on the map
+map.on('click', function () {
+    sidebar.hide();
+});
 
-//style filtered layers
+//FUNCTIONS FOR LAYERS' EVENTS
+//highlight feature while mouseover
+function highlightFeature(e) {
+    var layer = e.target;
+    opacity = layer.options.fillOpacity
+
+    layer.setStyle({
+        weight: 3,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: opacity - 0.1
+    });
+    // console.log('Highlight. Opacity is ' + (opacity - 0.1))
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+
+    info.update(layer.feature.properties);
+}
+//reset highlight functions for filtered layers
+function resetHighlight(e) {
+    target = e.target;
+    // year = target.feature.properties.year;
+    // layer_string = 'otgLayer_' + year;
+    // layer = window[layer_string];
+    
+    opacity = target.options.fillOpacity
+    // console.log('Reset Highlight. Opacity is ' + (opacity + 0.1))
+
+    e.target.setStyle({
+        fillOpacity: opacity + 0.1,
+        color: 'white',
+        dashArray: 3,
+        opacity: 0.8,
+        weight: 1,
+    });
+    
+    info.update();
+};
+//zoom to feature function for doubleclick event
+function zoomToFeature(e){
+    map.fitBounds(e.target.getBounds(), {
+        paddingTopLeft: [500,0]
+    });
+    console.log('zoomToFeature is starting')
+};
+
+//LAYERS' STYLES
 function style_15(feature){
     return {
         fillColor: '#de2d26',
@@ -122,14 +146,8 @@ function style_17(feature){
     }
 };
 
-//zoom to feature function for doubleclick event
-function zoomToFeature(e){
-    map.fitBounds(e.target.getBounds(), {
-        paddingTopLeft: [500,0]
-    });
-    console.log('zoomToFeature is starting')
-};
 
+//EVENTS
 map.doubleClickZoom.disable();
 
 //events for filtered layers
@@ -142,12 +160,7 @@ function onEachFeature(feature, layer) {
     });
 };
 
-//sidebar  animation
-setTimeout(function () {
-    sidebar.show();
-}, 500);
-
-//define filtered layers
+//LAYERS
 var otgLayer_2015 = L.geoJson(otg, {
     filter: function(feature, layer){
         return feature.properties.year == "2015";
@@ -172,7 +185,99 @@ var otgLayer_2017 = L.geoJson(otg, {
     onEachFeature: onEachFeature,
 }).addTo(map);
 
-// INFOPANEL BLOCK
+
+// ZOOM DEPENDANT STYLE
+map.on('zoomend', function(e) {
+    map.getZoom()
+    // console.log(map.getZoom())
+    if ( map.getZoom() <= 5 && map.getZoom() < 7){
+        console.log(map.getZoom())
+        otgLayer_2017.setStyle({
+            'fillOpacity': 0.6
+        });
+        otgLayer_2016.setStyle({
+            'fillOpacity': 0.6
+        });
+        otgLayer_2015.setStyle({
+            'fillOpacity': 0.6
+        });
+    }
+    else if ( map.getZoom() <= 7 && map.getZoom() < 8){
+        // console.log(map.getZoom())
+        otgLayer_2017.setStyle({
+            'fillOpacity': 0.6
+        });
+        otgLayer_2016.setStyle({
+            'fillOpacity': 0.6
+        });
+        otgLayer_2015.setStyle({
+            'fillOpacity': 0.6
+        });
+    }
+    else if ( map.getZoom() <= 8 && map.getZoom() < 9){
+        // console.log(map.getZoom())
+        otgLayer_2017.setStyle({
+            'fillOpacity': 0.5
+        });
+        otgLayer_2016.setStyle({
+            'fillOpacity': 0.5
+        });
+        otgLayer_2015.setStyle({
+            'fillOpacity': 0.5
+        });
+    }
+    else if ( map.getZoom() <= 9 && map.getZoom() < 10){
+        // console.log(map.getZoom())
+        otgLayer_2017.setStyle({
+            'fillOpacity': 0.4
+        });
+        otgLayer_2016.setStyle({
+            'fillOpacity': 0.4
+        });
+        otgLayer_2015.setStyle({
+            'fillOpacity': 0.4
+        });
+    }
+    else if ( map.getZoom() <= 10 && map.getZoom() < 11) {
+        // console.log(map.getZoom())
+        otgLayer_2017.setStyle({
+            'fillOpacity': 0.3
+        });
+        otgLayer_2016.setStyle({
+            'fillOpacity': 0.3
+        });
+        otgLayer_2015.setStyle({
+            'fillOpacity': 0.3
+        });
+    }
+    else if ( map.getZoom() <= 11 && map.getZoom() < 12) {
+        // console.log(map.getZoom())
+        otgLayer_2017.setStyle({
+            'fillOpacity': 0.2
+        });
+        otgLayer_2016.setStyle({
+            'fillOpacity': 0.2
+        });
+        otgLayer_2015.setStyle({
+            'fillOpacity': 0.2
+        });
+    }
+    else if ( map.getZoom() > 12) {
+        // console.log(map.getZoom())
+        otgLayer_2017.setStyle({
+            'fillOpacity': 0.12
+        });
+        otgLayer_2016.setStyle({
+            'fillOpacity': 0.12
+        });
+        otgLayer_2015.setStyle({
+            'fillOpacity': 0.12
+        });
+    }    
+});
+
+
+// INFOPANEL
 var info = L.control();
 
 info.onAdd = function (map) {
@@ -199,11 +304,7 @@ info.update = function (props) {
 };
 info.addTo(map);
 
-//hide sidebar when clicking on the map
-map.on('click', function () {
-    sidebar.hide();
-});
-
+//LAYERS
 // switching on and off OTGlayers, based on elections year
 var overlay = {
     "2015 рік виборів": otgLayer_2015,
