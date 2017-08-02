@@ -12,6 +12,10 @@ map.setMaxZoom(18);
 map.createPane('labels_pane');
 map.getPane('labels_pane').style.zIndex = 650;
 map.getPane('labels_pane').style.pointerEvents = 'none';
+//create pane for search .geojson
+map.createPane('search_pane');
+map.getPane('search_pane').style.zIndex = 200;
+map.getPane('search_pane').style.pointerEvents = 'none';
 
 //BASEMAPS
 L.tileLayer('https://api.mapbox.com/styles/v1/mykola-kozyr/cj47dr6zg117v2rlsm62ctk8x/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXlrb2xhLWtvenlyIiwiYSI6ImNpemNzeHBhaDAwNHkycW8wZm40OHptdTMifQ.6q-bTx4fwm9Ch-knzk1i3Q', {
@@ -38,6 +42,7 @@ var sidebar = L.control.sidebar('sidebar', {
 map.addControl(sidebar);
 //open sidebar while clicking on the OTG
 function openSidebar(e) {
+    console.log(e);
     sidebar.show();
     sidebar.setContent('<div id="sidebar"><h1>' + e.target.feature.properties.OTG + '</h1></div><br />' + 
         '<div id="sidebar"><p class="otg_data">Населення ' + e.target.feature.properties.popul_text + '</p></div>' +
@@ -54,6 +59,30 @@ function openSidebar(e) {
         '<div id="sidebar"><p class="otg_data">' + subvent_infr(e) + '</p></div>' + 
         '<div id="sidebar"><p class="otg_data">' + subvent_pcnt(e) + '</p></div>'
         );
+
+    // crazy stuff for highlighting the invisible otg_layer
+    var bounds = e.target._bounds._northEast.lat;
+    console.log(bounds);
+    var features = otg_layer._layers;
+    for (key in features) {
+        //console.log(features[key]._bounds._northEast);
+        if (features[key]._bounds._northEast.lat == bounds) {
+            features[key].setStyle({
+                opacity: 0.8,
+                weight: 2,
+                color: 'red',
+                dashArray: 4,
+                pane: 'labels_pane'
+            });
+        }
+        else {
+            features[key].setStyle({
+                opacity: 0,
+                pane: 'search_pane'
+            });
+        }
+    };  
+
     data(e);
     infobutton();
 };
@@ -63,6 +92,7 @@ setTimeout(function () {
 }, 500);
 //hide sidebar when clicking on the map
 map.on('click', function () {
+    console.log(sidebar.isVisible());
     sidebar.hide();
 });
 
@@ -108,10 +138,36 @@ function resetHighlight(e) {
 };
 //zoom to feature function for doubleclick event
 function zoomToFeature(e){
+
+
     map.fitBounds(e.target.getBounds(), {
         paddingTopLeft: [500,0]
     });
     console.log('zoomToFeature is starting')
+    
+    // crazy stuff for highlighting the invisible otg_layer
+    // style polygon with red outline
+    var bounds = e.target._bounds._northEast.lat;
+    console.log(bounds);
+    var features = otg_layer._layers;
+    for (key in features) {
+        //console.log(features[key]._bounds._northEast);
+        if (features[key]._bounds._northEast.lat == bounds) {
+            features[key].setStyle({
+                opacity: 0.8,
+                weight: 2,
+                color: 'red',
+                dashArray: 4,
+                pane: 'labels_pane'
+            });
+        }
+        else {
+            features[key].setStyle({
+                opacity: 0,
+                pane: 'search_pane'
+            });
+        }
+    };
 };
 
 //LAYERS' STYLES
@@ -143,6 +199,15 @@ function style_17(feature){
         color: 'white',
         dashArray: 3,
         opacity: 0.8,
+    }
+};
+function style_00(feature){
+    return {
+        fillColor: 'black',
+        weight: 0,
+        fillOpacity: 0,
+        color: 'white',
+        opacity: 0,
     }
 };
 
@@ -185,6 +250,10 @@ var otgLayer_2017 = L.geoJson(otg, {
     onEachFeature: onEachFeature,
 }).addTo(map);
 
+var otg_layer = L.geoJson(otg, {
+    style: style_00,
+    pane: 'search_pane',
+}).addTo(map);
 
 // ZOOM DEPENDANT STYLE
 map.on('zoomend', function(e) {
@@ -304,7 +373,7 @@ info.update = function (props) {
 };
 info.addTo(map);
 
-//LAYERS
+// LAYERS CONTROL
 // switching on and off OTGlayers, based on elections year
 var overlay = {
     "2015 рік виборів": otgLayer_2015,
@@ -313,3 +382,58 @@ var overlay = {
 };
 layerControl = L.control.layers(null, overlay, {position: 'topleft'});
 layerControl.addTo(map);
+
+// function for checking if sidebar is open
+// returns padding to the moveToLocation on leaflet-search if needed 
+function checkSidebar() {
+    console.log(sidebar.isVisible());
+    if (sidebar.isVisible() == false) {
+        return [0,0]
+    }
+    else {
+        return [500,0]
+    }
+}
+
+// SEARCH CONTROL
+var searchControl = new L.Control.Search({
+      layer: otg_layer,
+      propertyName: 'OTG',
+      marker: false,
+      moveToLocation: function(latlng, title, map) {
+        map.fitBounds( latlng.layer.getBounds(), {
+            paddingTopLeft: checkSidebar()
+        });
+    }
+});
+
+searchControl.on('search:locationfound', function(e) {
+    // change style for the feature
+    console.log(e.layer);
+    e.layer.setStyle({
+        opacity: 0.8,
+        weight: 2,
+        color: 'red',
+        dashArray: 4,
+        pane: 'labels_pane'
+    });
+    // I am having some fun, never mind :)
+    data = e.layer.feature.properties;
+    data_style = e.layer.options;
+    var a = {
+        target: {
+            feature: {
+                properties: data
+            },
+            options: data_style
+        }
+    };
+    openSidebar(a);
+}).on('search:canceled', function(e) {
+
+    otg_layer.eachLayer(function(layer) {   //restore feature color
+        otg_layer.resetStyle(layer);
+    }); 
+});
+
+map.addControl( searchControl );  //inizialize search control
