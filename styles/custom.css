@@ -84,3 +84,37 @@ div.image {
     top: 15px;
     right: 12px;
     opacity: 0.9;
+}
+#sq15 {
+    width: 12px;
+    height: 12px;
+    opacity: 0.8;
+    background-color: #de2d26;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 2px 3px 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+#sq16 {
+    width: 12px;
+    height: 12px;
+    opacity: 0.8;
+    background-color: #8856a7;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 2px 3px 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+#sq17 {
+    width: 12px;
+    height: 12px;
+    opacity: 0.8;
+    background-color: #2ca25f;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 2px 3px 0;
+    overflow: hidden;
+    cursor: pointer;
+}

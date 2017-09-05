@@ -375,13 +375,21 @@ info.addTo(map);
 
 // LAYERS CONTROL
 // switching on and off OTGlayers, based on elections year
-var overlay = {
-    "2015 рік виборів": otgLayer_2015,
-    "2016 рік виборів": otgLayer_2016,
-    "2017 рік виборів": otgLayer_2017,
+var groupedOverlays= {
+    "Рік виборів": {
+        "<div id='sq15'></div> 2015": otgLayer_2015,
+        "<div id='sq16'></div> 2016": otgLayer_2016,
+        "<div id='sq17'></div> 2017": otgLayer_2017,
+    }
 };
-layerControl = L.control.layers(null, overlay, {position: 'topleft'});
-layerControl.addTo(map);
+var options = {
+    //exclusiveGroups: ["otg"],
+    // Show a checkbox next to non-exclusive group labels for toggling all
+    groupCheckboxes: false
+};
+
+var layerControl = L.control.groupedLayers(null, groupedOverlays, options);
+map.addControl(layerControl);
 
 // function for checking if sidebar is open
 // returns padding to the moveToLocation on leaflet-search if needed 
