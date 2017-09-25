@@ -1,5 +1,5 @@
 function area(e) {
-    if (typeof e.target.feature.properties.area !== 'undefined') {
+    if (e.target.feature.properties.area != null) {
         console.log('Площа: ' + e.target.feature.properties.area);
         return('Площа, кв. км: ' + e.target.feature.properties.area + '<br />');
     }
@@ -10,7 +10,7 @@ function area(e) {
 };
 
 function city_popul(e) {
-    if (typeof e.target.feature.properties.city_popul !== 'undefined') {
+    if (e.target.feature.properties.city_popul != null) {
         console.log('Міське населення, осіб: ' + e.target.feature.properties.city_popul);
         return('Міське населення, осіб: ' + e.target.feature.properties.city_popul + '<br />');
     }
@@ -21,7 +21,7 @@ function city_popul(e) {
 };
 
 function urban_index(e) {
-    if (typeof e.target.feature.properties.urban_index !== 'undefined') {
+    if (e.target.feature.properties.urban_index != null) {
         console.log('Рівень урбанізації, %: ' + e.target.feature.properties.urban_index)
         return('Рівень урбанізації, %: ' + e.target.feature.properties.urban_index + '<br />')
     }
@@ -32,7 +32,7 @@ function urban_index(e) {
 };
 
 function settl_num(e) {
-    if (typeof e.target.feature.properties.settl_num !== 'undefined') {
+    if (e.target.feature.properties.settl_num != null) {
         console.log('Кількість населених пунктів: ' + e.target.feature.properties.settl_num)
         return('Кількість населених пунктів: ' + e.target.feature.properties.settl_num + '<br />')
     }
@@ -43,7 +43,7 @@ function settl_num(e) {
 };
 
 function elections(e) {
-    if (typeof e.target.feature.properties.elections !== 'undefined') {
+    if (e.target.feature.properties.elections != null) {
         console.log('Дата перших виборів: ' + e.target.feature.properties.elections)
         return('Дата перших виборів: ' + e.target.feature.properties.elections + '<br />')
     }
@@ -54,7 +54,7 @@ function elections(e) {
 };
 
 function income_pps(e) {
-    if (typeof e.target.feature.properties.income_pps !== 'undefined') {
+    if (e.target.feature.properties.income_pps != null) {
         console.log('Власні доходи на мешканця, 2016: ' + e.target.feature.properties.income_pps)
         return('Власні доходи на мешканця, грн у 2016: ' + e.target.feature.properties.income_pps + '<br />')
     }
@@ -65,7 +65,7 @@ function income_pps(e) {
 };
 
 function outlay_pps(e) {
-    if (typeof e.target.feature.properties.outlay_pps !== 'undefined') {
+    if (e.target.feature.properties.outlay_pps != null) {
         console.log('Капітальні видатки на мешканця, 2016: ' + e.target.feature.properties.outlay_pps)
         return('Капітальні видатки на мешканця, грн у 2016: ' + e.target.feature.properties.outlay_pps + '<br />')
     }
@@ -76,7 +76,7 @@ function outlay_pps(e) {
 };
 
 function subsidy(e) {
-    if (typeof e.target.feature.properties.subsidy !== 'undefined') {
+    if (e.target.feature.properties.subsidy != null) {
         console.log('Рівень дотаційності бюджетів: ' + e.target.feature.properties.subsidy)
         return('Рівень дотаційності бюджетів: ' + e.target.feature.properties.subsidy + '<br />')
     }
@@ -87,7 +87,7 @@ function subsidy(e) {
 };
 
 function outlay_adm(e) {
-    if (typeof e.target.feature.properties.outlay_adm !== 'undefined') {
+    if (e.target.feature.properties.outlay_adm != null) {
         console.log('Питома вага видатків на утримання апарату управління: ' + e.target.feature.properties.outlay_adm)
         return('Питома вага видатків на утримання апарату управління: ' + e.target.feature.properties.outlay_adm + '<br />')
     }
@@ -98,7 +98,7 @@ function outlay_adm(e) {
 };
 
 function subvent_infr(e) {
-    if (typeof e.target.feature.properties.subvent_infr !== 'undefined') {
+    if (e.target.feature.properties.subvent_infr != null) {
         console.log('Обсяг субвенцій на формування інфраструктури ОТГ, тис. грн: ' + e.target.feature.properties.subvent_infr)
         return('Обсяг субвенцій на формування інфраструктури ОТГ, тис. грн: ' + e.target.feature.properties.subvent_infr + '<br />')
     }
@@ -109,7 +109,7 @@ function subvent_infr(e) {
 };
 
 function subvent_pcnt(e) {
-    if (typeof e.target.feature.properties.subvent_pcnt !== 'undefined') {
+    if (e.target.feature.properties.subvent_pcnt != null) {
         console.log('Частка субвенцій на формування інфраструктури ОТГ: ' + e.target.feature.properties.subvent_pcnt)
         return('Частка субвенцій на формування інфраструктури ОТГ: ' + e.target.feature.properties.subvent_pcnt + '<br />')
     }

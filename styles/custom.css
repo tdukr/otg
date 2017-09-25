@@ -7,8 +7,8 @@ html, body, #map {
     height: 100%;
 }
 .info {
-    top: 6px;
-    right: 60px;
+    top: 10px;
+    right: 70px;
     padding: 6px 8px; 
     font: 14px/16px Arial, Helvetica, sans-serif; 
     background: white; background: rgba(255,255,255,0.75); 
@@ -79,7 +79,7 @@ html, body, #map {
 div.image {
     position: absolute;
     content:url(../data/tdu.png);
-    height: 50px;
+    height: 60px;
     z-index: 1000;
     top: 15px;
     right: 12px;
@@ -112,6 +112,17 @@ div.image {
     height: 12px;
     opacity: 0.8;
     background-color: #2ca25f;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 2px 3px 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+#sq17_upd {
+    width: 12px;
+    height: 12px;
+    opacity: 0.8;
+    background-color: #24f27d;
     display: inline-block;
     vertical-align: middle;
     margin: 0 2px 3px 0;

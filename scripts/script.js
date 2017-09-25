@@ -201,6 +201,16 @@ function style_17(feature){
         opacity: 0.8,
     }
 };
+function style_17_upd(feature){
+    return {
+        fillColor: '#24f27d',
+        weight: 1,
+        fillOpacity: 0.6,
+        color: 'white',
+        dashArray: 3,
+        opacity: 0.8,
+    }
+};
 function style_00(feature){
     return {
         fillColor: 'black',
@@ -244,9 +254,17 @@ var otgLayer_2016 = L.geoJson(otg, {
 
 var otgLayer_2017 = L.geoJson(otg, {
     filter: function(feature, layer){
-        return feature.properties.year == "2017";
+        return feature.properties.year == "2017" && feature.properties.elections != "29.10.2017";
     },
     style: style_17,
+    onEachFeature: onEachFeature,
+}).addTo(map);
+
+var otgLayer_2017_upd = L.geoJson(otg, {
+    filter: function(feature, layer){
+        return feature.properties.elections == "29.10.2017";
+    },
+    style: style_17_upd,
     onEachFeature: onEachFeature,
 }).addTo(map);
 
@@ -261,6 +279,9 @@ map.on('zoomend', function(e) {
     // console.log(map.getZoom())
     if ( map.getZoom() <= 5 && map.getZoom() < 7){
         console.log(map.getZoom())
+        otgLayer_2017_upd.setStyle({
+            'fillOpacity': 0.6
+        });        
         otgLayer_2017.setStyle({
             'fillOpacity': 0.6
         });
@@ -273,6 +294,9 @@ map.on('zoomend', function(e) {
     }
     else if ( map.getZoom() <= 7 && map.getZoom() < 8){
         // console.log(map.getZoom())
+        otgLayer_2017_upd.setStyle({
+            'fillOpacity': 0.6
+        });
         otgLayer_2017.setStyle({
             'fillOpacity': 0.6
         });
@@ -285,6 +309,9 @@ map.on('zoomend', function(e) {
     }
     else if ( map.getZoom() <= 8 && map.getZoom() < 9){
         // console.log(map.getZoom())
+        otgLayer_2017_upd.setStyle({
+            'fillOpacity': 0.5
+        });
         otgLayer_2017.setStyle({
             'fillOpacity': 0.5
         });
@@ -297,6 +324,9 @@ map.on('zoomend', function(e) {
     }
     else if ( map.getZoom() <= 9 && map.getZoom() < 10){
         // console.log(map.getZoom())
+        otgLayer_2017_upd.setStyle({
+            'fillOpacity': 0.4
+        });
         otgLayer_2017.setStyle({
             'fillOpacity': 0.4
         });
@@ -309,6 +339,9 @@ map.on('zoomend', function(e) {
     }
     else if ( map.getZoom() <= 10 && map.getZoom() < 11) {
         // console.log(map.getZoom())
+        otgLayer_2017_upd.setStyle({
+            'fillOpacity': 0.3
+        });
         otgLayer_2017.setStyle({
             'fillOpacity': 0.3
         });
@@ -321,6 +354,9 @@ map.on('zoomend', function(e) {
     }
     else if ( map.getZoom() <= 11 && map.getZoom() < 12) {
         // console.log(map.getZoom())
+        otgLayer_2017_upd.setStyle({
+            'fillOpacity': 0.2
+        });
         otgLayer_2017.setStyle({
             'fillOpacity': 0.2
         });
@@ -333,6 +369,9 @@ map.on('zoomend', function(e) {
     }
     else if ( map.getZoom() > 12) {
         // console.log(map.getZoom())
+        otgLayer_2017_upd.setStyle({
+            'fillOpacity': 0.12
+        });
         otgLayer_2017.setStyle({
             'fillOpacity': 0.12
         });
@@ -380,6 +419,9 @@ var groupedOverlays= {
         "<div id='sq15'></div> 2015": otgLayer_2015,
         "<div id='sq16'></div> 2016": otgLayer_2016,
         "<div id='sq17'></div> 2017": otgLayer_2017,
+    },
+    "Вибори заплановано на": {
+        "<div id='sq17_upd'></div> 29.10.2017": otgLayer_2017_upd,
     }
 };
 var options = {
